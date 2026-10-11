@@ -3,14 +3,53 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Список пользователей TeamSpeak</title>
+    <meta name="color-scheme" content="dark">
+    <meta name="theme-color" content="#22262a">
+    <meta name="robots" content="noindex">
+    <title>TeamSpeak</title>
+    <link rel="icon" href="favicon.svg" type="image/svg+xml">
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div class="container">
-        <h1>Название сервера</h1>
-        <div id="channels" class="channels-container"></div>
-    </div>
+    <main class="page">
+        <header class="server">
+            <h1 class="server__name" id="address">&nbsp;</h1>
+            <p class="server__role">Сервер TeamSpeak</p>
+            <div class="server__actions">
+                <a class="button" id="connect">Подключиться</a>
+                <button class="button button--secondary" id="copy-address" type="button">Скопировать адрес</button>
+            </div>
+            <dl class="stats">
+                <div class="stat">
+                    <dt>В эфире</dt>
+                    <dd><span id="stat-online">—</span><span class="stat__slots" id="stat-slots"></span></dd>
+                </div>
+                <div class="stat">
+                    <dt>Работает без перезагрузки</dt>
+                    <dd id="stat-uptime">—</dd>
+                </div>
+                <div class="stat">
+                    <dt>Пинг</dt>
+                    <dd id="stat-ping">—</dd>
+                </div>
+                <div class="stat">
+                    <dt>Потери пакетов</dt>
+                    <dd id="stat-loss">—</dd>
+                </div>
+            </dl>
+            <p class="server__updated" id="updated">загрузка…</p>
+        </header>
+
+        <div class="page__content">
+            <section class="section">
+                <h2 class="section__title">Каналы</h2>
+                <div class="channels" id="channels"></div>
+            </section>
+
+            <footer class="page__footer">© <span id="year"></span> boogiedk.me</footer>
+        </div>
+    </main>
+
     <script src="script.js"></script>
 </body>
 </html>
