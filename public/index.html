@@ -13,11 +13,14 @@
 <body>
     <main class="page">
         <header class="server">
-            <h1 class="server__name" id="address">&nbsp;</h1>
+            <h1 class="server__name" id="server-name">&nbsp;</h1>
             <p class="server__role">Сервер TeamSpeak</p>
             <div class="server__actions">
                 <a class="button" id="connect">Подключиться</a>
-                <button class="button button--secondary" id="copy-address" type="button">Скопировать адрес</button>
+                <button class="button button--secondary" id="copy-address" type="button" title="Скопировать адрес">
+                    <span id="address"></span>
+                    <span class="button__hint" id="copy-hint">скопировать</span>
+                </button>
             </div>
             <dl class="stats">
                 <div class="stat">

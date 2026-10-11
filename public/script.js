@@ -116,7 +116,8 @@ function renderChannels(nodes) {
 function renderServer(status) {
     const address = status.address || location.hostname;
 
-    document.title = `${address} — TeamSpeak`;
+    document.title = `${status.name} — TeamSpeak`;
+    document.getElementById('server-name').textContent = status.name;
     document.getElementById('address').textContent = address;
     document.getElementById('connect').href = `ts3server://${address}`;
 
@@ -145,15 +146,15 @@ async function refresh() {
     }
 }
 
-document.getElementById('copy-address').addEventListener('click', async event => {
-    const button = event.currentTarget;
+document.getElementById('copy-address').addEventListener('click', async () => {
+    const hint = document.getElementById('copy-hint');
     try {
         await navigator.clipboard.writeText(document.getElementById('address').textContent);
-        button.textContent = 'Скопировано';
+        hint.textContent = 'скопировано';
     } catch (error) {
-        button.textContent = 'Не получилось';
+        hint.textContent = 'не получилось';
     }
-    setTimeout(() => { button.textContent = 'Скопировать адрес'; }, 1500);
+    setTimeout(() => { hint.textContent = 'скопировать'; }, 1500);
 });
 
 document.getElementById('year').textContent = new Date().getFullYear();

@@ -117,6 +117,7 @@ a:hover {
 }
 
 .button--secondary {
+    gap: 12px;
     border-color: var(--color-line);
     background: none;
     color: var(--color-text);
@@ -127,6 +128,11 @@ a:hover {
     background: var(--color-surface);
     color: var(--color-text);
     filter: none;
+}
+
+.button__hint {
+    color: var(--color-muted);
+    font-size: 0.8125rem;
 }
 
 .button:focus-visible {
