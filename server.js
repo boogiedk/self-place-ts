@@ -1,11 +1,9 @@
 const express = require('express');
 const { TeamSpeak } = require('ts3-nodejs-library');
-const demoStatus = require('./demo');
 
 const port = Number(process.env.PORT) || 3000;
 // На сервере страница слушает только localhost и отдаётся наружу через nginx
 const host = process.env.HOST;
-const demo = process.argv.includes('--demo');
 
 // Адрес, который видят посетители. Если не задан, страница подставит свой hostname.
 const publicAddress = process.env.TS_PUBLIC_ADDRESS || null;
@@ -22,8 +20,8 @@ const query = {
 // Сколько живёт ответ: ServerQuery дёргается не чаще этого, сколько бы вкладок ни было открыто.
 const CACHE_MS = 5000;
 
-if (!demo && (!query.username || !query.password)) {
-    console.error('Задайте TS_QUERY_USER и TS_QUERY_PASSWORD (см. .env.example) или запустите с --demo');
+if (!query.username || !query.password) {
+    console.error('Задайте TS_QUERY_USER и TS_QUERY_PASSWORD (см. .env.example)');
     process.exit(1);
 }
 
@@ -106,7 +104,7 @@ let cache = { at: 0, status: null };
 
 function getStatus() {
     if (Date.now() - cache.at > CACHE_MS) {
-        const status = (demo ? Promise.resolve(demoStatus()) : fetchStatus()).catch(err => {
+        const status = fetchStatus().catch(err => {
             cache.at = 0;
             throw err;
         });
@@ -129,5 +127,5 @@ app.get('/api/status', async (req, res) => {
 });
 
 app.listen(port, host, () => {
-    console.log(`Server running at http://localhost:${port}${demo ? ' (demo)' : ''}`);
+    console.log(`Server running at http://localhost:${port}`);
 });
